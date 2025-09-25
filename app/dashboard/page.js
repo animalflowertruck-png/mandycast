@@ -132,10 +132,8 @@ const terms = [
   "Minimum Deposit: $5",
   "Maximum Deposit: No limit",
   "Deposit Bonus: All regular deposits receive a 20% bonus",
-
   "Freeplay requires active promotion of our platform (e.g., like, comment, and share).",
   "Redeemable freeplay can be cashed out at $10 once you grow it to $30 in-game. Remaining freeplay balance will be redeemed and reset to zero.",
-
   "Minimum Cashout: $15",
   "Maximum Cashout: $700 (determined solely by deposit amount; bonuses are not included in cashout eligibility).",
   "Signup Bonus Deduction: Any signup bonus will be deducted at the time of cashout.",
@@ -143,13 +141,10 @@ const terms = [
   "Processing Schedule: Cashouts are processed three times daily. If a delay occurs, you will be notified.",
   "Claim Window: You must claim your cashout within 24 hours of your deposit.",
   "Game Re-entry Rule: Once a cashout request is submitted, do not re-enter the game. Any additional funds will be reset to zero.",
-
   "Referral bonuses are credited after your referred player completes three deposits.",
   "You will then receive 50% of their first deposit as a referral reward.",
-
   "We are a 100% legitimate platform with over 5 years of continuous operation."
 ];
-
 
 // ⭐ Reviews (50)
 const initialReviews = [
@@ -299,7 +294,7 @@ export default function Dashboard() {
           Winners never quit, Quitters never win
         </div>
 
-        {/* Wins + Deposit */}
+        {/* Wins + Deposit + Message */}
         <section className="mb-10 max-w-5xl mx-auto flex items-center justify-between gap-8">
           {/* Wins */}
           <div className="flex-1 min-w-0">
@@ -320,17 +315,34 @@ export default function Dashboard() {
             )}
           </div>
 
-          {/* Deposit Button */}
-          <button
-            onClick={() => setShowDeposit(true)}
-            className="shrink-0 ml-8 px-7 py-3 rounded-2xl text-lg md:text-2xl font-extrabold text-black
-                       bg-gradient-to-r from-yellow-300 via-amber-300 to-pink-500
-                       shadow-[0_0_25px_rgba(255,215,0,0.55)] hover:shadow-[0_0_35px_rgba(255,215,0,0.85)]
-                       hover:scale-[1.03] transition cursor-pointer"
-            style={{ fontFamily: "var(--font-orbitron)" }}
-          >
-            💳 Deposit
-          </button>
+          {/* Buttons side by side */}
+          <div className="flex gap-4 shrink-0 ml-8">
+            {/* Deposit */}
+            <button
+              onClick={() => setShowDeposit(true)}
+              className="px-7 py-3 rounded-2xl text-lg md:text-2xl font-extrabold text-black
+                         bg-gradient-to-r from-yellow-300 via-amber-300 to-pink-500
+                         shadow-[0_0_25px_rgba(255,215,0,0.55)] hover:shadow-[0_0_35px_rgba(255,215,0,0.85)]
+                         hover:scale-[1.03] transition cursor-pointer animate-bounce"
+              style={{ fontFamily: "var(--font-orbitron)" }}
+            >
+              💳 Deposit
+            </button>
+
+            {/* Message Us */}
+            <a
+              href="https://www.facebook.com/profile.php?id=61556688809031"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-7 py-3 rounded-2xl text-lg md:text-2xl font-extrabold text-black
+                         bg-gradient-to-r from-blue-400 to-indigo-500
+                         shadow-[0_0_25px_rgba(0,0,255,0.55)] hover:shadow-[0_0_35px_rgba(0,0,255,0.85)]
+                         hover:scale-[1.03] transition cursor-pointer animate-pulse"
+              style={{ fontFamily: "var(--font-orbitron)" }}
+            >
+              💬 Message Us
+            </a>
+          </div>
         </section>
 
         {/* Featured + Banners */}
@@ -354,7 +366,7 @@ export default function Dashboard() {
             ))}
           </div>
 
-          {/* Banners: auto-fit, no cropping */}
+          {/* Banners */}
           <BannerSlider />
         </section>
 
@@ -458,7 +470,7 @@ export default function Dashboard() {
           </button>
         </nav>
 
-        {/* Mini Reviews (fixed + sign, no overflow) */}
+        {/* Mini Reviews */}
         <div className="mt-6 p-4 bg-black/60 rounded-lg text-sm border border-yellow-400/30">
           <h3 className="text-lg font-bold text-yellow-300 mb-2" style={{ fontFamily: "var(--font-orbitron)" }}>
             ⭐ Latest Reviews
@@ -473,24 +485,23 @@ export default function Dashboard() {
           </div>
 
           <div className="mt-3 flex items-center bg-black/70 border border-yellow-400/40 rounded-lg overflow-hidden">
-  <input
-    type="text"
-    value={newReview}
-    onChange={(e) => setNewReview(e.target.value)}
-    onKeyDown={(e) => {
-      if (e.key === "Enter") addReview();
-    }}
-    placeholder="Write review..."
-    className="flex-1 px-3 py-2 text-white bg-transparent placeholder-gray-400 outline-none"
-  />
-  <button
-    onClick={addReview}
-    className="px-4 py-2 bg-green-500 text-white font-bold text-lg rounded-r-lg hover:bg-green-600 transition cursor-pointer"
-  >
-    ➕
-  </button>
-</div>
-
+            <input
+              type="text"
+              value={newReview}
+              onChange={(e) => setNewReview(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") addReview();
+              }}
+              placeholder="Write review..."
+              className="flex-1 px-3 py-2 text-white bg-transparent placeholder-gray-400 outline-none"
+            />
+            <button
+              onClick={addReview}
+              className="px-4 py-2 bg-green-500 text-white font-bold text-lg rounded-r-lg hover:bg-green-600 transition cursor-pointer"
+            >
+              ➕
+            </button>
+          </div>
         </div>
       </aside>
 
@@ -521,11 +532,10 @@ export default function Dashboard() {
       <Modal title="📩 Contact Us" isOpen={showContact} onClose={() => setShowContact(false)}>
         <div className="space-y-4 text-lg">
           <p>📘 Facebook: <a href="https://www.facebook.com/profile.php?id=61556688809031" target="_blank" className="text-blue-400 hover:underline">facebook.com/mandycast</a></p>
-         <p>📘 Facebook: <a href="https://www.facebook.com/profile.php?id=61577168813662" target="_blank" className="text-blue-400 hover:underline">facebook.com/mandycastii</a></p>
+          <p>📘 Facebook: <a href="https://www.facebook.com/profile.php?id=61577168813662" target="_blank" className="text-blue-400 hover:underline">facebook.com/mandycastii</a></p>
           <p>📘 Facebook: <a href="https://www.facebook.com/profile.php?id=61573703266334" target="_blank" className="text-blue-400 hover:underline">facebook.com/mandycastbackup</a></p>
           <p>📘 Facebook: <a href="https://www.facebook.com/groups/1479858426495795" target="_blank" className="text-blue-400 hover:underline">facebook.com/mandycastgroup</a></p>
-
-           <p> 📸 Instagram: <a href="https://instagram.com" target="_blank" className="text-pink-400 hover:underline">instagram.com/mandycast</a></p>
+          <p>📸 Instagram: <a href="https://instagram.com" target="_blank" className="text-pink-400 hover:underline">instagram.com/mandycast</a></p>
           <p>📧 Email: <a href="mailto:mandyusa700@email.com" className="text-yellow-300 hover:underline">mandyusa700@email.com</a></p>
         </div>
       </Modal>
