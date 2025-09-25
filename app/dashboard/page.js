@@ -217,8 +217,26 @@ export default function Dashboard() {
   const [miniStart, setMiniStart] = useState(0);
   const [miniFade, setMiniFade] = useState(true);
 
+
   // Rotating slogan fade
   const [sloganFade, setSloganFade] = useState(true);
+
+  // ✅ 30-minute auto logout
+  useEffect(() => {
+    const checkSession = () => {
+      const loginTime = localStorage.getItem("loginTime");
+      if (loginTime) {
+        const diff = Date.now() - parseInt(loginTime, 10);
+        if (diff > 30 * 60 * 1000) {
+          signOut(auth).then(() => router.push("/auth/login"));
+        }
+      }
+    };
+
+    checkSession();
+    const interval = setInterval(checkSession, 60 * 1000);
+    return () => clearInterval(interval);
+  }, [router]);
 
   // rotate wins
   useEffect(() => {

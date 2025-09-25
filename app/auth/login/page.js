@@ -2,13 +2,19 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  setPersistence,
+  browserLocalPersistence,
+  browserSessionPersistence,
+} from "firebase/auth";
 import { auth } from "../../../lib/firebase";
 import VideoBackground from "../../../components/VideoBackground";
 import { LogIn, Dice6 } from "lucide-react";
 
 export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
+  const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
 
@@ -20,7 +26,18 @@ export default function Login() {
     e.preventDefault();
     setError("");
     try {
+      // Persistence depends on "Remember Me"
+      await setPersistence(
+        auth,
+        rememberMe ? browserLocalPersistence : browserSessionPersistence
+      );
+
       await signInWithEmailAndPassword(auth, form.email, form.password);
+
+      // Save login time for 30-minute session tracking
+      localStorage.setItem("loginTime", Date.now().toString());
+      localStorage.setItem("rememberMe", rememberMe ? "true" : "false");
+
       router.push("/dashboard");
     } catch (err) {
       setError(err.message);
@@ -34,7 +51,7 @@ export default function Login() {
       <div className="relative z-10 w-full max-w-md bg-black/80 border border-yellow-500/40 shadow-[0_0_25px_rgba(255,215,0,0.5)] rounded-2xl p-8">
         <h1 className="flex items-center justify-center gap-2 text-3xl font-bold text-center bg-gradient-to-r from-yellow-400 to-red-500 bg-clip-text text-transparent mb-6">
           <Dice6 className="w-8 h-8 text-yellow-400" />
-           Mandy Cast
+          Mandy Cast
           <Dice6 className="w-8 h-8 text-yellow-400" />
         </h1>
 
@@ -62,6 +79,17 @@ export default function Login() {
             required
             className="w-full px-3 py-2 bg-black border border-yellow-500/40 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
           />
+
+          {/* ✅ Remember Me option */}
+          <label className="flex items-center gap-2 text-gray-300 text-sm">
+            <input
+              type="checkbox"
+              checked={rememberMe}
+              onChange={() => setRememberMe(!rememberMe)}
+              className="w-4 h-4 accent-yellow-400"
+            />
+            Remember Me
+          </label>
 
           <button
             type="submit"
