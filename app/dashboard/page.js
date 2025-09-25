@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { signOut } from "firebase/auth";
 import { auth } from "../../lib/firebase";
 import Image from "next/image";
-//import Modal from "../../components/Modal";
+import Modal from "../../components/Modal";
 import BannerSlider from "../../components/BannerSlider";
 import DepositModal from "../../components/DepositModal";
 import { Orbitron, Poppins } from "next/font/google";
