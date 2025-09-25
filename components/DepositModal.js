@@ -1,6 +1,6 @@
 "use client";
 
-import Modal from "./Modal";
+import Modal from "../components/Modal";
 
 /**
  * Placeholder deposit modal (no live payments yet).
