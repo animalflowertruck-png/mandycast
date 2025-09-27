@@ -8,13 +8,29 @@ import Image from "next/image";
 import Modal from "../../components/Modal";
 import BannerSlider from "../../components/BannerSlider";
 import DepositModal from "../../components/DepositModal";
-import { Orbitron, Poppins, Cinzel_Decorative, Dancing_Script } from "next/font/google";
+import {
+  Orbitron,
+  Poppins,
+  Cinzel_Decorative,
+  Dancing_Script,
+} from "next/font/google";
 
 // Fonts
-const dancingScript = Dancing_Script({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
+const dancingScript = Dancing_Script({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
 const casinoFont = Cinzel_Decorative({ weight: ["700"], subsets: ["latin"] });
-const orbitron = Orbitron({ subsets: ["latin"], weight: ["600", "700", "800", "900"], variable: "--font-orbitron" });
-const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-poppins" });
+const orbitron = Orbitron({
+  subsets: ["latin"],
+  weight: ["600", "700", "800", "900"],
+  variable: "--font-orbitron",
+});
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-poppins",
+});
 
 // Games list
 const gameList = [
@@ -49,12 +65,19 @@ const agentList = [
   { name: "YOLO", link: "https://agent.yolo777.game/admin" },
   { name: "Joker", link: "https://agent.joker777.win/admin/login" },
   { name: "Cash Machine", link: "https://agentserver.cashmachine777.com/admin/login" },
-  { name: "Blue Dragon", link: "https://agent.bluedragon777.com/Work/com_SetScore.aspx" },
-  { name: "Panda Master", link: "https://pandamaster.vip/default.aspx" },
+  {
+    name: "Blue Dragon",
+    link:
+      "https://agent.bluedragon777.com/Work/com_SetScore.aspx?sid=0113266431&action=setServerScore&tid=1701738577130",
+  },
+  {
+    name: "Panda Master",
+    link: "https://pandamaster.vip/default.aspx?638276565951391914",
+  },
   { name: "River Sweeps", link: "https://river-pay.com/cashier/create" },
 ];
 
-// Fake wins
+// Fake wins (varied)
 const wins = [
   { name: "Alice", game: "Juwa", amount: 420 },
   { name: "Bob", game: "Milkyway", amount: 700 },
@@ -76,30 +99,115 @@ const wins = [
   { name: "Mason Adams", game: "Cash Machine", amount: 449 },
   { name: "Harper Lewis", game: "Joker", amount: 696 },
   { name: "Elijah Walker", game: "Vegas Sweeps", amount: 129 },
+  { name: "Evelyn Allen", game: "Panda Master", amount: 301 },
+  { name: "Alexander Wright", game: "Milkyway", amount: 677 },
+  { name: "Abigail King", game: "Blue Dragon", amount: 192 },
+  { name: "Michael Green", game: "River Sweeps", amount: 413 },
   { name: "Ella Hill", game: "Orion Star", amount: 254 },
+  { name: "Daniel Baker", game: "Cash Machine", amount: 674 },
+  { name: "Scarlett Rivera", game: "YOLO", amount: 327 },
+  { name: "Henry Perez", game: "Mafia", amount: 583 },
+  { name: "Grace Campbell", game: "Gameroom", amount: 699 },
+  { name: "Jackson Roberts", game: "Fire Kirin", amount: 214 },
+  { name: "Aria Mitchell", game: "Ultra Panda", amount: 422 },
+  { name: "Sebastian Turner", game: "Game Vault", amount: 599 },
+  { name: "Luna Parker", game: "Juwa", amount: 134 },
+  { name: "Matthew Evans", game: "Joker", amount: 378 },
+  { name: "Chloe Edwards", game: "Milkyway", amount: 692 },
+  { name: "David Collins", game: "Blue Dragon", amount: 175 },
+  { name: "Victoria Stewart", game: "Vegas Sweeps", amount: 645 },
+  { name: "Joseph Morris", game: "Orion Star", amount: 308 },
+  { name: "Sofia Rogers", game: "Cash Machine", amount: 487 },
+  { name: "Samuel Cook", game: "River Sweeps", amount: 299 },
   { name: "Avery Bell", game: "YOLO", amount: 559 },
+  { name: "Carter Murphy", game: "Mafia", amount: 401 },
+  { name: "Ella-Rose Bailey", game: "Gameroom", amount: 287 },
+  { name: "Wyatt Cooper", game: "Juwa", amount: 664 },
+  { name: "Layla Richardson", game: "Ultra Panda", amount: 321 },
+  { name: "Jack Howard", game: "Game Vault", amount: 276 },
+  { name: "Zoe Ward", game: "Fire Kirin", amount: 438 },
+  { name: "Owen Cox", game: "Panda Master", amount: 583 },
+  { name: "Mila Diaz", game: "Joker", amount: 367 },
+  { name: "Luke Foster", game: "Milkyway", amount: 198 },
+  { name: "Ella-Mae Simmons", game: "Vegas Sweeps", amount: 707 },
+  { name: "Levi Bryant", game: "River Sweeps", amount: 426 },
+  { name: "Hannah Gray", game: "Blue Dragon", amount: 315 },
+  { name: "Ethan", game: "Ultra Panda", amount: 280 },
+  { name: "George", game: "Blue Dragon", amount: 410 },
+  { name: "Hannah", game: "Vegas Sweeps", amount: 700 },
 ];
 
 // Terms
 const terms = [
   "Minimum Deposit: $5",
   "Maximum Deposit: No limit",
-  "Deposit Bonus: 20% bonus",
-  "Signup Bonus Deduction: Deducted at cashout",
+  "Deposit Bonus: All regular deposits receive a 20% bonus.",
+  "Freeplay requires active promotion of our platform (e.g., like, comment, and share).",
+  "Redeemable freeplay can be cashed out at $10 once you grow it to $30 in-game. Remaining freeplay balance will be redeemed and reset to zero.",
   "Minimum Cashout: $15",
-  "Maximum Cashout: $700",
-  "Cashout Frequency: Up to 3 per day",
-  "Processing Schedule: 3 times daily",
-  "Referral Bonus: 50% credited after 3 deposits",
+  "Maximum Cashout: $700 (determined solely by deposit amount; bonuses are not included in cashout eligibility).",
+  "Signup Bonus Deduction: Any signup bonus will be deducted at the time of cashout.",
+  "Cashout Frequency: Up to 3 cashouts allowed per day. Additional requests within 24 hours will be limited to 50% payout.",
+  "Processing Schedule: Cashouts are processed three times daily. If a delay occurs, you will be notified.",
+  "Claim Window: You must claim your cashout within 24 hours of your deposit.",
+  "Game Re-entry Rule: Once a cashout request is submitted, do not re-enter the game. Any additional funds will be reset to zero.",
+  "Referral bonuses are credited after your referred player completes three deposits.",
+  "You will then receive 50% of their first deposit as a referral reward.",
+  "We are a 100% legitimate platform with over 5 years of continuous operation.",
 ];
 
-// Initial reviews (seeded)
+// Seeded reviews
 const initialReviews = [
   { id: 1, user: "Olivia Carter", text: "Amazing games and smooth experience!" },
   { id: 2, user: "Liam Johnson", text: "Really fun and easy to play, highly recommend." },
   { id: 3, user: "Sophia Martinez", text: "Customer support was super helpful when I needed them." },
   { id: 4, user: "Noah Anderson", text: "Fast withdrawals, I got my winnings quickly!" },
   { id: 5, user: "Isabella Brown", text: "Great variety of slots and tables to choose from." },
+  { id: 6, user: "Ethan Garcia", text: "The bonuses and rewards keep me coming back." },
+  { id: 7, user: "Ava Davis", text: "Simple to use and works perfectly on my phone." },
+  { id: 8, user: "James Wilson", text: "I love the graphics and the smooth gameplay." },
+  { id: 9, user: "Mia Thompson", text: "Really addictive but in the best way possible!" },
+  { id: 10, user: "Benjamin Scott", text: "Best online gaming experience I’ve had so far." },
+  { id: 11, user: "Charlotte Young", text: "Payouts are legit, I cashed out with no issues." },
+  { id: 12, user: "Lucas Hall", text: "Very user-friendly and fun to play with friends." },
+  { id: 13, user: "Amelia Clark", text: "I enjoy the daily bonuses, they add a nice touch." },
+  { id: 14, user: "Mason Adams", text: "Support team responded quickly to my questions." },
+  { id: 15, user: "Harper Lewis", text: "Exciting games that keep you entertained for hours." },
+  { id: 16, user: "Elijah Walker", text: "I had no problems depositing or withdrawing." },
+  { id: 17, user: "Evelyn Allen", text: "I’ve tried others, but this one is by far the best." },
+  { id: 18, user: "Alexander Wright", text: "The jackpots make it so thrilling to play." },
+  { id: 19, user: "Abigail King", text: "Love the interface, very clean and modern." },
+  { id: 20, user: "Michael Green", text: "Safe and secure, I feel comfortable playing here." },
+  { id: 21, user: "Ella Hill", text: "Easy sign-up process and smooth gameplay." },
+  { id: 22, user: "Daniel Baker", text: "Great graphics and no lag while playing." },
+  { id: 23, user: "Scarlett Rivera", text: "Enjoying it more than I expected, very fun." },
+  { id: 24, user: "Henry Perez", text: "Fast payouts, exactly what I was looking for." },
+  { id: 25, user: "Grace Campbell", text: "The live games are really exciting and realistic." },
+  { id: 26, user: "Jackson Roberts", text: "I appreciate the different payment options available." },
+  { id: 27, user: "Aria Mitchell", text: "Definitely one of my top gaming choices now." },
+  { id: 28, user: "Sebastian Turner", text: "The rewards system keeps me motivated to play." },
+  { id: 29, user: "Luna Parker", text: "Smooth design, everything works flawlessly." },
+  { id: 30, user: "Matthew Evans", text: "Great entertainment, I’ve been recommending it to friends." },
+  { id: 31, user: "Chloe Edwards", text: "I love that I can play on both desktop and mobile." },
+  { id: 32, user: "David Collins", text: "Very reliable platform, I’ve had no problems so far." },
+  { id: 33, user: "Victoria Stewart", text: "Lots of game choices and fun challenges." },
+  { id: 34, user: "Joseph Morris", text: "Trustworthy site, payouts are always on time." },
+  { id: 35, user: "Sofia Rogers", text: "Friendly support staff who actually care." },
+  { id: 36, user: "Samuel Cook", text: "Exciting themes and constant new updates." },
+  { id: 37, user: "Avery Bell", text: "The bonuses are great and easy to claim." },
+  { id: 38, user: "Carter Murphy", text: "Definitely my favorite gaming site right now." },
+  { id: 39, user: "Ella-Rose Bailey", text: "The interface is simple and very intuitive." },
+  { id: 40, user: "Wyatt Cooper", text: "Fun and fair, I enjoy playing every day." },
+  { id: 41, user: "Layla Richardson", text: "Quick payouts, I was impressed by the speed." },
+  { id: 42, user: "Jack Howard", text: "Plenty of games to choose from, never gets boring." },
+  { id: 43, user: "Zoe Ward", text: "Great for casual gaming or longer sessions." },
+  { id: 44, user: "Owen Cox", text: "The deposit process is fast and super easy." },
+  { id: 45, user: "Mila Diaz", text: "I love the jackpots, always keeps me excited." },
+  { id: 46, user: "Luke Foster", text: "Reliable payouts, I’ve cashed out several times." },
+  { id: 47, user: "Ella-Mae Simmons", text: "Everything loads quickly and works smoothly." },
+  { id: 48, user: "Levi Bryant", text: "One of the most entertaining gaming experiences online." },
+  { id: 49, user: "Hannah Gray", text: "I love the daily promotions and extra bonuses." },
+  { id: 50, user: "Daniel Ross", text: "Safe, fast, and fun — exactly what I wanted." },
 ];
 
 export default function Dashboard() {
@@ -117,6 +225,10 @@ export default function Dashboard() {
   const [reviews, setReviews] = useState(initialReviews);
   const [newReview, setNewReview] = useState("");
 
+  // Mini-reviews rotation (10s) with fade
+  const [miniStart, setMiniStart] = useState(0);
+  const [miniFade, setMiniFade] = useState(true);
+
   // Rotate wins
   useEffect(() => {
     const t = setInterval(() => {
@@ -124,6 +236,18 @@ export default function Dashboard() {
     }, 8000);
     return () => clearInterval(t);
   }, []);
+
+  // Rotate mini reviews every 10s with fade
+  useEffect(() => {
+    const t = setInterval(() => {
+      setMiniFade(false);
+      setTimeout(() => {
+        setMiniStart((s) => (s + 4) % reviews.length);
+        setMiniFade(true);
+      }, 300);
+    }, 10000);
+    return () => clearInterval(t);
+  }, [reviews.length]);
 
   const handleSignOut = async () => {
     await signOut(auth);
@@ -136,12 +260,29 @@ export default function Dashboard() {
     const added = { id: Date.now(), user: "Anonymous", text };
     setReviews((prev) => [added, ...prev]);
     setNewReview("");
+    setMiniStart(0);
+  };
+
+  const miniSlice = () => {
+    if (reviews.length <= 4) return reviews;
+    const end = miniStart + 4;
+    return end <= reviews.length
+      ? reviews.slice(miniStart, end)
+      : [...reviews.slice(miniStart), ...reviews.slice(0, end - reviews.length)];
   };
 
   return (
-    <div className={`${poppins.variable} ${orbitron.variable} ${casinoFont.className} font-sans relative min-h-screen bg-black text-white flex`}>
+    <div
+      className={`${poppins.variable} ${orbitron.variable} ${casinoFont.className} font-sans relative min-h-screen bg-black text-white flex`}
+    >
       {/* Background video */}
-      <video autoPlay loop muted playsInline className="pointer-events-none fixed inset-0 w-full h-full object-cover opacity-30">
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="pointer-events-none fixed inset-0 w-full h-full object-cover opacity-30"
+      >
         <source src="/casino-bg.mp4" type="video/mp4" />
       </video>
 
@@ -149,10 +290,11 @@ export default function Dashboard() {
       <div className="relative z-10 flex-1 p-6 lg:p-8 max-w-[1400px] mx-auto w-full">
         {/* Mobile Hamburger */}
         <button
-          className="lg:hidden absolute top-4 right-4 z-30 p-2 rounded-md bg-yellow-400 text-black font-bold shadow-md"
-          onClick={() => setSidebarOpen(!sidebarOpen)}
+          className="lg:hidden absolute top-4 right-4 z-30 p-2 rounded-md bg-gradient-to-r from-yellow-400 to-red-500 text-black font-bold shadow-md"
+          onClick={() => setSidebarOpen(true)}
+          aria-label="Open menu"
         >
-          {sidebarOpen ? "✖" : "☰"}
+          ☰
         </button>
 
         {/* Title */}
@@ -165,7 +307,9 @@ export default function Dashboard() {
         </h1>
 
         {/* Slogan */}
-        <div className={`${dancingScript.className} text-center text-lg md:text-xl text-pink-300 mb-6 font-bold tracking-wide`}>
+        <div
+          className={`${dancingScript.className} text-center text-lg md:text-xl text-pink-300 mb-6 font-bold tracking-wide`}
+        >
           Winners never quit, Quitters never win
         </div>
 
@@ -203,8 +347,15 @@ export default function Dashboard() {
         {/* Featured Games + Banner */}
         <section className="mb-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-start max-w-6xl mx-auto">
           <div className="flex flex-col gap-6">
-            {[{ name: "🎣 Fish Games", desc: "Shoot fish & win big" }, { name: "🎰 Slot Games", desc: "Spin the reels" }, { name: "🎡 Roulette", desc: "Classic wheel of fortune" }].map((g, i) => (
-              <div key={i} className="bg-black/70 border-2 border-yellow-400 rounded-xl p-6 text-center hover:scale-[1.02] transition">
+            {[
+              { name: "🎣 Fish Games", desc: "Shoot fish & win big" },
+              { name: "🎰 Slot Games", desc: "Spin the reels" },
+              { name: "🎡 Roulette", desc: "Classic wheel of fortune" },
+            ].map((g, i) => (
+              <div
+                key={i}
+                className="bg-black/70 border-2 border-yellow-400 rounded-xl p-6 text-center hover:scale-[1.02] transition"
+              >
                 <h3 className="text-2xl font-bold text-yellow-300">{g.name}</h3>
                 <p className="text-gray-300">{g.desc}</p>
               </div>
@@ -217,82 +368,280 @@ export default function Dashboard() {
 
         {/* Games grid */}
         <section className="mb-12">
-          <h2 className="text-5xl font-extrabold text-center mb-8 text-yellow-300 drop-shadow-md tracking-wide">🎮 Games</h2>
+          <h2 className="text-5xl font-extrabold text-center mb-8 text-yellow-300 drop-shadow-md tracking-wide">
+            🎮 Games
+          </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
             {gameList.map((game, idx) => (
-              <a key={idx} href={game.link} target="_blank" rel="noopener noreferrer" className="bg-black/70 border border-yellow-400 rounded-xl p-3 text-center hover:scale-105 transition cursor-pointer">
-                <Image src={`/games/${game.name.toLowerCase().replace(/\s+/g, "")}.webp`} alt={game.name} width={220} height={150} className="mx-auto rounded-lg w-full h-auto" />
+              <a
+                key={idx}
+                href={game.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-black/70 border border-yellow-400 rounded-xl p-3 text-center hover:scale-105 transition cursor-pointer"
+              >
+                <Image
+                  src={`/games/${game.name.toLowerCase().replace(/\s+/g, "")}.webp`}
+                  alt={game.name}
+                  width={220}
+                  height={150}
+                  className="mx-auto rounded-lg w-full h-auto"
+                />
                 <h3 className="text-lg mt-2 text-yellow-300 font-bold">{game.name}</h3>
               </a>
             ))}
           </div>
         </section>
 
-        {/* About Us */}
+        {/* About Us (bottom) */}
         <section className="max-w-5xl mx-auto mb-16">
           <div className="bg-black/70 border border-yellow-400/70 rounded-2xl p-6 md:p-8 shadow-md">
-            <h3 className="text-3xl md:text-4xl font-extrabold text-yellow-300 mb-4 tracking-wide">About Us</h3>
+            <h3 className="text-3xl md:text-4xl font-extrabold text-yellow-300 mb-4 tracking-wide">
+              About Us
+            </h3>
             <div className="space-y-4 text-gray-200 leading-7">
-              <p><strong className="text-yellow-300">Welcome to Mandy Cast 🎉</strong></p>
-              <p>Since 2020, Mandy Cast has been a trusted and verified platform...</p>
+              <p>
+                <strong className="text-yellow-300">Welcome to Mandy Cast 🎉</strong>
+              </p>
+              <p>
+                Since 2020, Mandy Cast has been a trusted and verified platform, delivering top-quality
+                entertainment and rewards to thousands of players worldwide. Our mission is simple: to provide
+                a seamless, secure, and enjoyable experience that no other platform can match.
+              </p>
+              <p className="text-yellow-200 font-semibold">Why Choose Us?</p>
               <ul className="list-disc pl-6 space-y-1">
-                <li>✅ 100% Signup Bonus</li>
-                <li>🤝 50% Referral Bonus</li>
-                <li>🎁 20% Regular Bonus</li>
-                <li>👑 VIP Offers</li>
-                <li>💳 Multiple Payment Options</li>
-                <li>🕑 24/7 Support</li>
+                <li>✅ 100% Signup Bonus – Kickstart your journey with double the excitement.</li>
+                <li>🤝 50% Referral Bonus – Invite friends and earn big while sharing the fun.</li>
+                <li>🎁 20% Regular Bonus – Keep winning with ongoing rewards.</li>
+                <li>👑 Exclusive VIP Offers – Unlock premium perks designed for our VIP members.</li>
+                <li>💳 Multiple Payment Options – Fast, secure, and flexible transactions.</li>
+                <li>🕑 24/7 Support – Our friendly and professional team is always here for you.</li>
               </ul>
+              <p>
+                At Mandy Cast, we don’t just offer games—we create an experience filled with fun, rewards,
+                and opportunities to win more every day.
+              </p>
+              <p className="text-yellow-200">
+                ✨ Join us today and start your journey of entertainment and earning with the platform players
+                trust.
+              </p>
             </div>
+          </div>
+
+          {/* Footer banner */}
+          <div
+            className="mt-8 text-center text-4xl md:text-5xl font-extrabold
+                       bg-gradient-to-r from-yellow-300 via-pink-500 to-red-500 bg-clip-text text-transparent
+                       drop-shadow-[0_0_26px_rgba(255,215,0,0.85)] tracking-wider"
+            style={{ fontFamily: "var(--font-orbitron)" }}
+          >
+            Mandy Cast
           </div>
         </section>
       </div>
 
+      {/* Overlay to close sidebar by clicking outside */}
+      {sidebarOpen && (
+        <div
+          onClick={() => setSidebarOpen(false)}
+          className="fixed inset-0 z-20 bg-black/40 lg:hidden"
+          aria-hidden="true"
+        />
+      )}
+
       {/* Sidebar */}
       <aside
-        className={`fixed lg:static top-0 right-0 h-full lg:h-auto w-64 bg-black/95 lg:bg-black/80 p-6 z-20 transform transition-transform duration-300
-        ${sidebarOpen ? "translate-x-0" : "translate-x-full"} lg:translate-x-0`}
+        className={`fixed lg:static top-0 right-0 h-full lg:h-auto w-72 lg:w-64 bg-black/95 lg:bg-black/80 p-6 z-30 transform transition-transform duration-300
+        ${sidebarOpen ? "translate-x-0" : "translate-x-full"} lg:translate-x-0 flex flex-col`}
       >
-        <button onClick={handleSignOut} className="mb-6 w-full py-2 bg-gradient-to-r from-yellow-400 to-red-500 text-black font-bold rounded-lg hover:scale-[1.02] transition cursor-pointer">
+        {/* Close (mobile only) */}
+        <button
+          className="lg:hidden self-end -mt-2 -mr-2 mb-4 p-2 rounded-md bg-gradient-to-r from-yellow-400 to-red-500 text-black font-bold shadow-md"
+          onClick={() => setSidebarOpen(false)}
+          aria-label="Close menu"
+        >
+          ✖
+        </button>
+
+        <button
+          onClick={handleSignOut}
+          className="mb-6 w-full py-2 rounded-lg font-bold text-black shadow-md cursor-pointer
+                     bg-gradient-to-r from-yellow-300 via-amber-300 to-pink-500 hover:scale-[1.02] transition"
+        >
           🚪 Sign Out
         </button>
+
         <nav className="flex flex-col gap-4">
-          <button onClick={() => setShowRules(true)} className="py-2 px-4 bg-black/60 rounded-lg text-yellow-300 font-bold hover:scale-[1.02] transition cursor-pointer">📜 Rules</button>
-          <button onClick={() => setShowReviews(true)} className="py-2 px-4 bg-black/60 rounded-lg text-yellow-300 font-bold hover:scale-[1.02] transition cursor-pointer">⭐ Reviews</button>
-          <button onClick={() => setShowContact(true)} className="py-2 px-4 bg-black/60 rounded-lg text-yellow-300 font-bold hover:scale-[1.02] transition cursor-pointer">📩 Contact Us</button>
-          <button onClick={() => setShowAgents(true)} className="py-2 px-4 bg-black/60 rounded-lg text-yellow-300 font-bold hover:scale-[1.02] transition cursor-pointer">🕹 Agent Links</button>
+          {[
+            { label: "📜 Rules", action: () => setShowRules(true) },
+            { label: "⭐ Reviews", action: () => setShowReviews(true) },
+            { label: "📩 Contact Us", action: () => setShowContact(true) },
+            { label: "🕹 Agent Links", action: () => setShowAgents(true) },
+          ].map((btn, i) => (
+            <button
+              key={i}
+              onClick={btn.action}
+              className="py-2 px-4 rounded-lg font-bold text-black shadow-md cursor-pointer
+                         bg-gradient-to-r from-yellow-300 via-amber-300 to-pink-500 hover:scale-[1.02] transition"
+            >
+              {btn.label}
+            </button>
+          ))}
         </nav>
-        {/* Reviews */}
+
+        {/* Mini reviews (auto-rotating) */}
         <div className="mt-6 p-4 bg-black/60 rounded-lg text-sm border border-yellow-400/30">
           <h3 className="text-lg font-bold text-yellow-300 mb-2">⭐ Latest Reviews</h3>
-          <div className="space-y-2 min-h-[110px]">
-            {reviews.slice(0, 4).map((r) => (
-              <p key={r.id} className="text-gray-200"><span className="text-yellow-300 font-semibold">{r.user}:</span> {r.text}</p>
+
+          <div
+            className={`space-y-2 min-h-[110px] transition-opacity duration-300 ${
+              miniFade ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            {miniSlice().map((r) => (
+              <p key={r.id} className="text-gray-200">
+                <span className="text-yellow-300 font-semibold">{r.user}:</span> {r.text}
+              </p>
             ))}
           </div>
+
           <div className="mt-3 flex items-center bg-black/70 border border-yellow-400/40 rounded-lg overflow-hidden">
-            <input type="text" value={newReview} onChange={(e) => setNewReview(e.target.value)} onKeyDown={(e) => e.key === "Enter" && addReview()} placeholder="Write review..." className="flex-1 px-3 py-2 text-white bg-transparent placeholder-gray-400 outline-none" />
-            <button onClick={addReview} className="px-4 py-2 bg-green-500 text-white font-bold text-lg rounded-r-lg hover:bg-green-600 transition cursor-pointer">Submit</button>
+            <input
+              type="text"
+              value={newReview}
+              onChange={(e) => setNewReview(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && addReview()}
+              placeholder="Write review..."
+              className="flex-1 px-3 py-2 text-white bg-transparent placeholder-gray-400 outline-none"
+            />
+            <button
+              onClick={addReview}
+              className="px-4 py-2 bg-green-500 text-white font-bold text-lg rounded-r-lg hover:bg-green-600 transition cursor-pointer"
+              aria-label="Submit review"
+            >
+              Submit
+            </button>
           </div>
         </div>
       </aside>
 
       {/* Modals */}
       <DepositModal isOpen={showDeposit} onClose={() => setShowDeposit(false)} />
-      <Modal title="📜 Terms & Conditions" isOpen={showRules} onClose={() => setShowRules(false)}><ul className="list-disc pl-6 space-y-2">{terms.map((t, i) => <li key={i}>{t}</li>)}</ul></Modal>
-      <Modal title="⭐ Player Reviews" isOpen={showReviews} onClose={() => setShowReviews(false)}><div className="space-y-4 max-h-[70vh] overflow-y-auto pr-2">{reviews.map((r) => <div key={r.id} className="bg-black/60 rounded-lg p-3"><p className="text-gray-200"><span className="text-yellow-300 font-bold">{r.user}:</span> {r.text}</p></div>)}</div></Modal>
-      <Modal title="📩 Contact Us" isOpen={showContact} onClose={() => setShowContact(false)}>
-        <p>📘 Facebook: <a href="https://www.facebook.com/profile.php?id=61556688809031" target="_blank" className="text-blue-400 hover:underline">facebook.com/mandycast</a></p>
-        <p>📸 Instagram: <a href="https://instagram.com" target="_blank" className="text-pink-400 hover:underline">instagram.com/mandycast</a></p>
-        <p>📧 Email: <a href="mailto:mandyusa700@email.com" className="text-yellow-300 hover:underline">mandyusa700@email.com</a></p>
+
+      <Modal
+        title="📜 Terms & Conditions"
+        isOpen={showRules}
+        onClose={() => setShowRules(false)}
+      >
+        <ul className="list-disc pl-6 space-y-2">
+          {terms.map((term, idx) => (
+            <li key={idx}>{term}</li>
+          ))}
+        </ul>
       </Modal>
-      <Modal title="🕹 Agent Links" isOpen={showAgents} onClose={() => setShowAgents(false)}>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">{agentList.map((a, i) => (
-          <a key={i} href={a.link} target="_blank" rel="noopener noreferrer" className="bg-black/70 border border-yellow-400 rounded-xl p-3 text-center hover:scale-105 transition cursor-pointer">
-            <Image src={`/games/${a.name.toLowerCase().replace(/\s+/g, "")}.webp`} alt={a.name} width={180} height={120} className="mx-auto rounded-lg" />
-            <h3 className="text-lg mt-2 text-yellow-300 font-bold">{a.name}</h3>
-          </a>
-        ))}</div>
+
+      <Modal
+        title="⭐ Player Reviews"
+        isOpen={showReviews}
+        onClose={() => setShowReviews(false)}
+      >
+        <div className="space-y-4 max-h-[70vh] overflow-y-auto pr-2">
+          {reviews.map((r) => (
+            <div key={r.id} className="bg-black/60 rounded-lg p-3">
+              <p className="text-gray-200">
+                <span className="text-yellow-300 font-bold">{r.user}:</span> {r.text}
+              </p>
+            </div>
+          ))}
+        </div>
+      </Modal>
+
+      <Modal
+        title="📩 Contact Us"
+        isOpen={showContact}
+        onClose={() => setShowContact(false)}
+      >
+        <div className="space-y-3 text-lg">
+          <p>
+            📘 Facebook:{" "}
+            <a
+              href="https://www.facebook.com/profile.php?id=61556688809031"
+              target="_blank"
+              className="text-blue-400 hover:underline"
+            >
+              facebook.com/mandycast
+            </a>
+          </p>
+          <p>
+            📘 Facebook:{" "}
+            <a
+              href="https://www.facebook.com/profile.php?id=61577168813662"
+              target="_blank"
+              className="text-blue-400 hover:underline"
+            >
+              facebook.com/mandycastii
+            </a>
+          </p>
+          <p>
+            📘 Facebook:{" "}
+            <a
+              href="https://www.facebook.com/profile.php?id=61573703266334"
+              target="_blank"
+              className="text-blue-400 hover:underline"
+            >
+              facebook.com/mandycastbackup
+            </a>
+          </p>
+          <p>
+            📘 Facebook Group:{" "}
+            <a
+              href="https://www.facebook.com/groups/1479858426495795"
+              target="_blank"
+              className="text-blue-400 hover:underline"
+            >
+              facebook.com/mandycastgroup
+            </a>
+          </p>
+          <p>
+            📸 Instagram:{" "}
+            <a href="https://instagram.com" target="_blank" className="text-pink-400 hover:underline">
+              instagram.com/mandycast
+            </a>
+          </p>
+          <p>
+            📧 Email:{" "}
+            <a href="mailto:mandyusa700@email.com" className="text-yellow-300 hover:underline">
+              mandyusa700@email.com
+            </a>
+          </p>
+        </div>
+      </Modal>
+
+      <Modal
+        title="🕹 Agent Links"
+        isOpen={showAgents}
+        onClose={() => setShowAgents(false)}
+      >
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {agentList.map((agent, idx) => (
+            <a
+              key={idx}
+              href={agent.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-black/70 border border-yellow-400 rounded-xl p-3 text-center hover:scale-105 transition cursor-pointer"
+            >
+              <Image
+                src={`/games/${agent.name.toLowerCase().replace(/\s+/g, "")}.webp`}
+                alt={agent.name}
+                width={180}
+                height={120}
+                className="mx-auto rounded-lg"
+              />
+              <h3 className="text-lg mt-2 text-yellow-300 font-bold">{agent.name}</h3>
+            </a>
+          ))}
+        </div>
       </Modal>
     </div>
   );
