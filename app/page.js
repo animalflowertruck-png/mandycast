@@ -1,6 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { Cinzel_Decorative } from "next/font/google";
+import Modal from "../components/Modal";
+import Image from "next/image";
 
 // 🎰 Google font import
 const casinoFont = Cinzel_Decorative({
@@ -8,7 +11,29 @@ const casinoFont = Cinzel_Decorative({
   subsets: ["latin"],
 });
 
+// 🎮 Game links (custom order you provided)
+const gameList = [
+  { name: "Juwa", link: "http://dl.juwa777.com" },
+  { name: "Orion Star", link: "http://start.orionstars.vip:8580/index.html" },
+  { name: "Milkyway", link: "https://milkywayapp.xyz" },
+  { name: "Game Vault", link: "http://download.gamevault999.com" },
+  { name: "Mafia", link: "http://www.mafia77777.com" },
+  { name: "Firekirin", link: "http://start.firekirin.xyz:8580" },
+  { name: "Ultra Panda", link: "http://www.ultrapanda.mobi/" },
+
+  { name: "Gameroom", link: "https://www.gameroom777.com/m" },
+  { name: "Blue Dragon", link: "http://app.bluedragon777.com" },
+  { name: "Panda Master", link: "https://pandamaster.vip:8888/index.html" },
+  { name: "Cash Machine", link: "http://www.cashmachine777.com" },
+  { name: "YOLO", link: "https://yolo777.game/" },
+  { name: "Joker", link: "https://www.joker777.win/" },
+  { name: "Vegas Sweeps", link: "https://m.lasvegassweeps.com/" },
+  { name: "River Sweeps", link: "https://getapp.river777.com/" },
+];
+
 export default function Home() {
+  const [showGames, setShowGames] = useState(false);
+
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center text-white">
       {/* Background video */}
@@ -63,8 +88,16 @@ export default function Home() {
           </div>
         </div>
 
+        {/* 🎮 Game Links Button */}
+        <button
+          onClick={() => setShowGames(true)}
+          className="mt-6 px-8 py-3 bg-gradient-to-r from-yellow-400 to-red-500 text-black font-bold rounded-xl shadow-[0_0_20px_gold] hover:scale-110 hover:shadow-[0_0_35px_gold] transition cursor-pointer opacity-0 animate-fadeInUp delay-1000"
+        >
+          🎮 Game Links
+        </button>
+
         {/* About Section */}
-        <section className="mt-16 bg-black/70 border border-yellow-500/40 rounded-2xl shadow-xl p-8 text-left opacity-0 animate-fadeInUp delay-1000">
+        <section className="mt-16 bg-black/70 border border-yellow-500/40 rounded-2xl shadow-xl p-8 text-left opacity-0 animate-fadeInUp delay-1200">
           <h2
             className={`${casinoFont.className} text-3xl mt-2 mb-6 bg-gradient-to-r from-yellow-400 to-red-500 bg-clip-text text-transparent drop-shadow-[0_0_15px_gold]`}
           >
@@ -120,23 +153,11 @@ export default function Home() {
         </section>
 
         {/* Game grid */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 opacity-0 animate-fadeInUp delay-1200">
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 opacity-0 animate-fadeInUp delay-1400">
           {[
-            {
-              icon: "🎰",
-              title: "Slots",
-              desc: "Spin the reels & chase jackpots!",
-            },
-            {
-              icon: "🐟",
-              title: "Fish Games",
-              desc: "Catch fish & win golden rewards!",
-            },
-            {
-              icon: "🎲",
-              title: "Card Games",
-              desc: "Blackjack, Poker & more fun!",
-            },
+            { icon: "🎰", title: "Slots", desc: "Spin the reels & chase jackpots!" },
+            { icon: "🐟", title: "Fish Games", desc: "Catch fish & win golden rewards!" },
+            { icon: "🎲", title: "Card Games", desc: "Blackjack, Poker & more fun!" },
           ].map((game, idx) => (
             <div
               key={idx}
@@ -151,83 +172,60 @@ export default function Home() {
         </div>
       </main>
 
-      {/* CSS for ticker + animations */}
+      {/* 🎮 Game Links Modal */}
+      <Modal title="🎮 Game Links" isOpen={showGames} onClose={() => setShowGames(false)}>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          {gameList.map((game, idx) => (
+            <a
+              key={idx}
+              href={game.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-black/70 border border-yellow-400 rounded-xl p-3 text-center hover:scale-105 transition cursor-pointer"
+            >
+              <Image
+                src={`/games/${game.name.toLowerCase().replace(/\s+/g, "")}.webp`}
+                alt={game.name}
+                width={180}
+                height={120}
+                className="mx-auto rounded-lg"
+              />
+              <h3 className="text-lg mt-2 text-yellow-300 font-bold">{game.name}</h3>
+            </a>
+          ))}
+        </div>
+      </Modal>
+
+      {/* CSS */}
       <style jsx>{`
         @keyframes ticker {
-          0% {
-            transform: translateX(0%);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
+          0% { transform: translateX(0%); }
+          100% { transform: translateX(-50%); }
         }
         @keyframes fadeInUp {
-          0% {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          0% { opacity: 0; transform: translateY(20px); }
+          100% { opacity: 1; transform: translateY(0); }
         }
         @keyframes flyerGlow {
-          0% {
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6),
-              0 0 40px rgba(255, 215, 0, 0.4);
-          }
-          50% {
-            box-shadow: 0 0 35px rgba(255, 215, 0, 0.9),
-              0 0 70px rgba(255, 215, 0, 0.6);
-          }
-          100% {
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6),
-              0 0 40px rgba(255, 215, 0, 0.4);
-          }
+          0%,100% { box-shadow: 0 0 20px rgba(255,215,0,0.6), 0 0 40px rgba(255,215,0,0.4); }
+          50% { box-shadow: 0 0 35px rgba(255,215,0,0.9), 0 0 70px rgba(255,215,0,0.6); }
         }
-        .flyer-glow {
-          animation: flyerGlow 3s ease-in-out infinite;
-        }
+        .flyer-glow { animation: flyerGlow 3s ease-in-out infinite; }
 
         @keyframes joinGlow {
-          0% {
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5),
-              0 0 20px rgba(255, 215, 0, 0.4);
-          }
-          50% {
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.9),
-              0 0 50px rgba(255, 215, 0, 0.6);
-          }
-          100% {
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5),
-              0 0 20px rgba(255, 215, 0, 0.4);
-          }
+          0%,100% { box-shadow: 0 0 10px rgba(255,215,0,0.5), 0 0 20px rgba(255,215,0,0.4); }
+          50% { box-shadow: 0 0 25px rgba(255,215,0,0.9), 0 0 50px rgba(255,215,0,0.6); }
         }
-        .join-glow {
-          animation: joinGlow 2.5s ease-in-out infinite;
-        }
+        .join-glow { animation: joinGlow 2.5s ease-in-out infinite; }
 
-        .animate-fadeInUp {
-          animation: fadeInUp 1s ease forwards;
-        }
-        .delay-200 {
-          animation-delay: 0.2s;
-        }
-        .delay-400 {
-          animation-delay: 0.4s;
-        }
-        .delay-600 {
-          animation-delay: 0.6s;
-        }
-        .delay-800 {
-          animation-delay: 0.8s;
-        }
-        .delay-1000 {
-          animation-delay: 1s;
-        }
-        .delay-1200 {
-          animation-delay: 1.2s;
-        }
+        .animate-fadeInUp { animation: fadeInUp 1s ease forwards; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-600 { animation-delay: 0.6s; }
+        .delay-800 { animation-delay: 0.8s; }
+        .delay-1000 { animation-delay: 1s; }
+        .delay-1200 { animation-delay: 1.2s; }
+        .delay-1400 { animation-delay: 1.4s; }
       `}</style>
     </div>
   );
